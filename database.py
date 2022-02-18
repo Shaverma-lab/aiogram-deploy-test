@@ -15,7 +15,7 @@ class PostreSQL:
         self.cursor.execute(
             """CREATE TABLE IF NOT EXISTS users(
                 id serial PRIMARY KEY,
-                user_id intager NOT NULL);"""
+                user_id integer NOT NULL);"""
         )
 
     def load(self, user_id):
