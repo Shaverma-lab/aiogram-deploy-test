@@ -16,6 +16,7 @@ logging.basicConfig(level=logging.INFO)
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
+dp.middleware.setup(LoggingMiddleware())
 
 @dp.message_handler()
 async def echo(message: types.Message):
