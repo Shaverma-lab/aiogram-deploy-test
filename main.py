@@ -1,5 +1,5 @@
 from aiogram import Dispatcher, Bot, executor, types
-from aiogram.contrib.middlewares import logging
+import logging
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
 import os
 
