@@ -6,7 +6,7 @@ import os
 TOKEN = '5156487975:AAEA4IaC4ivT_08mMjame_ryhOM9-AngDpI'
 
 WEBHOOK_HOST = 'https://aiogram-deploy-test.herokuapp.com/'
-WEBHOOK_PATH = ''
+WEBHOOK_PATH = f'/wenhook/{TOKEN}'
 WEBHOOK_URL = f"{WEBHOOK_HOST}{TOKEN}"
 
 WEBAPP_HOST = '0.0.0.0'
@@ -21,7 +21,7 @@ dp = Dispatcher(bot)
 async def echo(message: types.Message):
     await bot.send_message(message.chat.id, message.text)
 
-async def on_startup(dp):
+async def on_startup(dispatcher: Dispatcher) -> None:
     await bot.set_webhook(WEBHOOK_URL)
 
 
