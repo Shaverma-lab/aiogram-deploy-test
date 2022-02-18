@@ -7,7 +7,7 @@ TOKEN = '5156487975:AAEA4IaC4ivT_08mMjame_ryhOM9-AngDpI'
 
 WEBHOOK_HOST = 'https://aiogram-deploy-test.herokuapp.com/'
 WEBHOOK_PATH = f'/wenhook/{TOKEN}'
-WEBHOOK_URL = f"{WEBHOOK_HOST}{TOKEN}"
+WEBHOOK_URL = f"{WEBHOOK_HOST}{WEBHOOK_PATH}"
 
 WEBAPP_HOST = '0.0.0.0'
 WEBAPP_PORT = int(os.environ.get("PORT", 5000))
