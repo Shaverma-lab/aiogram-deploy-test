@@ -30,7 +30,7 @@ async def echo(message: types.Message):
     result = db_object.fetchone()
 
     if not result:
-        db_object.execute(f"INSERT INTO test_db(user_id) VALUES (%s)", (message.chat.id))
+        db_object.execute(f"INSERT INTO test_db(user_id) VALUES ({message.chat.id})")
         db_connection.commit()
 
     await bot.send_message(message.chat.id, message.text)
