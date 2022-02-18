@@ -2,6 +2,7 @@ from aiogram import Dispatcher, Bot, executor, types
 import logging
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
 import os
+from database import Database
 
 TOKEN = '5156487975:AAEA4IaC4ivT_08mMjame_ryhOM9-AngDpI'
 
@@ -12,14 +13,23 @@ WEBHOOK_URL = f"{WEBHOOK_HOST}{WEBHOOK_PATH}"
 WEBAPP_HOST = '0.0.0.0'
 WEBAPP_PORT = int(os.environ.get("PORT", 5000))
 
+DB_URI = 'postgres://zeggusrpjmigok:53f68d040e0bfea32968aac22c73b3a67d932b9f9665ef0923687317b257100c@ec2-3-228-236-221.compute-1.amazonaws.com:5432/daasq9dv4plgkh'
+
 logging.basicConfig(level=logging.INFO)
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 dp.middleware.setup(LoggingMiddleware())
 
+db = Database(DB_URI)
+
 @dp.message_handler()
 async def echo(message: types.Message):
+    result = db.load(message.chat.id)
+
+    if not result:
+        db.add_new_user(message.chat.id)
+
     await bot.send_message(message.chat.id, message.text)
 
 async def on_startup(dispatcher: Dispatcher) -> None:
