@@ -16,7 +16,7 @@ class Database:
 
     def add_new_user(self, user_id):
         self.cur.execute(f"""
-            INSERT INTO test_db(user_id) VALUES({user_id});
-        """)
+            INSERT INTO test_db(user_id) VALUES(%s);
+        """, (user_id))
 
         self.conn.commit()
