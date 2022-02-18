@@ -5,8 +5,8 @@ import os
 
 TOKEN = '5156487975:AAEA4IaC4ivT_08mMjame_ryhOM9-AngDpI'
 
-WEBHOOK_HOST = 'https://aiogram-deploy-test.herokuapp.com/'
-WEBHOOK_PATH = f'/wenhook/{TOKEN}'
+WEBHOOK_HOST = 'https://aiogram-deploy-test.herokuapp.com'
+WEBHOOK_PATH = f'/webhook/{TOKEN}'
 WEBHOOK_URL = f"{WEBHOOK_HOST}{WEBHOOK_PATH}"
 
 WEBAPP_HOST = '0.0.0.0'
