@@ -3,8 +3,9 @@ import psycopg2
 
 
 class Database:
-    def __init__(self, db_uri):
-        self.conn = psycopg2.connect(db_uri, sslmode='require')
+    def __init__(self, dbname, user, password, host):
+        self.conn = psycopg2.connect(dbname=dbname, user=user,
+                                     password=password, host=host)
         self.cur = self.conn.cursor()
 
     def load(self, user_id):
