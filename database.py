@@ -31,7 +31,7 @@ class PostreSQL:
             f"UPDATE users SET message = '{message}' WHERE user_id = {user_id}"
         )
 
-    def get_language(self, user_id):
+    def get_id(self, user_id):
         self.cursor.execute(
             f"SELECT id FROM users WHERE user_id = {user_id}"
         )

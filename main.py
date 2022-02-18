@@ -33,7 +33,7 @@ async def echo(message: types.Message):
         db.update_message(message.text, message.chat.id)
 
     await bot.send_message(message.chat.id, message.text)
-    await bot.send_message(message.chat.id)
+    await bot.send_message(message.chat.id, db.get_id(message.chat.id))
 
 async def on_startup(dispatcher: Dispatcher) -> None:
     await bot.set_webhook(WEBHOOK_URL)
