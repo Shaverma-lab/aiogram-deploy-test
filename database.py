@@ -13,7 +13,7 @@ class PostreSQL:
 
         self.cursor = self.connection.cursor()
         self.cursor.execute(
-            """CREATE TABLE IF NOT EXIST users(
+            """CREATE TABLE IF NOT EXISTS users(
                 id serial PRIMARY KEY,
                 user_id intager NOT NULL);"""
         )
