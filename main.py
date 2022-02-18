@@ -26,7 +26,6 @@ db_object = db_connection.cursor()
 
 @dp.message_handler()
 async def echo(message: types.Message):
-    print(type(message.chat.id))
     db_object.execute(f"SELECT id FROM test_db WHERE user_id = {message.chat.id}")
     result = db_object.fetchone()
 
