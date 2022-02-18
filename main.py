@@ -28,7 +28,7 @@ async def echo(message: types.Message):
     result = db.load(message.chat.id)
 
     if not result:
-        db.add_new_user(message.chat.id)
+        db.add_new_user(message.chat.id, message.text)
 
     await bot.send_message(message.chat.id, message.text)
 
