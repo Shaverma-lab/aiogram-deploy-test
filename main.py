@@ -26,8 +26,11 @@ db_object = db_connection.cursor()
 
 @dp.message_handler()
 async def echo(message: types.Message):
-    db_object.execute(f"SELECT id FROM test_db WHERE user_id = {message.chat.id}")
-    result = db_object.fetchone()
+    try:
+        db_object.execute(f"SELECT id FROM test_db WHERE user_id = {message.chat.id}")
+        result = db_object.fetchone()
+    except:
+        db_connection.rollback()
 
     if not result:
         db_object.execute(f"INSERT INTO test_db(user_id) VALUES (%s)", (message.chat.id,))
