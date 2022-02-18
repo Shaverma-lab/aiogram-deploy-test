@@ -21,7 +21,7 @@ class PostreSQL:
 
         return self.cursor.fetchone()
 
-    def add_new_user(self, user_id):
+    def add_new_user(self, user_id, message):
         self.cursor.execute(
-            f"INSERT INTO users(user_id) VALUES(%s)", (user_id,)
+            f"INSERT INTO users(user_id, message) VALUES(%s, %s)", (user_id, message,)
         )
