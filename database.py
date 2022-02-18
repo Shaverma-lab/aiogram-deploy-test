@@ -2,13 +2,8 @@ import psycopg2
 
 
 class PostreSQL:
-    def __init__(self, host, user, password, db_name):
-        self.connection = psycopg2.connect(
-            host = host,
-            user = user,
-            password = password,
-            database = db_name
-        )
+    def __init__(self, db_uri):
+        self.connection = psycopg2.connect(db_uri, sslmode='require')
         self.connection.autocommit = True
 
         self.cursor = self.connection.cursor()
