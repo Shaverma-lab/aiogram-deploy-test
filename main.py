@@ -2,7 +2,7 @@ from aiogram import Dispatcher, Bot, executor, types
 import logging
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
 import os
-from database import Database
+import psycopg2
 
 TOKEN = '5156487975:AAEA4IaC4ivT_08mMjame_ryhOM9-AngDpI'
 
@@ -13,21 +13,25 @@ WEBHOOK_URL = f"{WEBHOOK_HOST}{WEBHOOK_PATH}"
 WEBAPP_HOST = '0.0.0.0'
 WEBAPP_PORT = int(os.environ.get("PORT", 5000))
 
+DB_URI = 'postgres://zeggusrpjmigok:53f68d040e0bfea32968aac22c73b3a67d932b9f9665ef0923687317b257100c@ec2-3-228-236-221.compute-1.amazonaws.com:5432/daasq9dv4plgkh'
+
 logging.basicConfig(level=logging.INFO)
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 dp.middleware.setup(LoggingMiddleware())
 
-db = Database('daasq9dv4plgkh', 'zeggusrpjmigok',
-              '53f68d040e0bfea32968aac22c73b3a67d932b9f9665ef0923687317b257100c', 'ec2-3-228-236-221.compute-1.amazonaws.com')
+db_connection = psycopg2.connect(DB_URI, sslmode='require')
+db_object = db_connection.cursor()
 
 @dp.message_handler()
 async def echo(message: types.Message):
-    result = db.load(message.chat.id)
+    db_object.execute(f"SELECT id FROM test_db WHERE user_id = {message.chat.id}")
+    result = db_object.fetchone()
 
     if not result:
-        db.add_new_user(message.chat.id)
+        db_object.execute(f"INSERT INTO test_db(user_id) VALUES (%s)", (message.chat.id))
+        db_connection.commit()
 
     await bot.send_message(message.chat.id, message.text)
 
