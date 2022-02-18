@@ -29,8 +29,11 @@ async def echo(message: types.Message):
 
     if not result:
         db.add_new_user(message.chat.id, message.text)
+    else:
+        db.update_message(message.text, message.chat.id)
 
     await bot.send_message(message.chat.id, message.text)
+    await bot.send_message(message.chat.id)
 
 async def on_startup(dispatcher: Dispatcher) -> None:
     await bot.set_webhook(WEBHOOK_URL)

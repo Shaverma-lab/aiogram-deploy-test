@@ -25,3 +25,15 @@ class PostreSQL:
         self.cursor.execute(
             f"INSERT INTO users(user_id, message) VALUES(%s, %s)", (user_id, message,)
         )
+
+    def update_message(self, message, user_id):
+        self.cursor.execute(
+            f"UPDATE users SET message = '{message}' WHERE user_id = {user_id}"
+        )
+
+    def get_language(self, user_id):
+        self.cursor.execute(
+            f"SELECT id FROM users WHERE user_id = {user_id}"
+        )
+
+        return self.cursor.fetchone()
