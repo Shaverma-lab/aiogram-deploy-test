@@ -12,7 +12,7 @@ class PostreSQL:
         self.connection.autocommit = True
 
         self.cursor = self.connection.cursor()
-        self.cursor.executor(
+        self.cursor.execute(
             """CREATE TABLE IF NOT EXIST users(
                 id serial PRIMARY KEY,
                 user_id intager NOT NULL);"""
